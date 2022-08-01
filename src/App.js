@@ -181,7 +181,7 @@ const App = () => {
               onClick={() => handleChangeProduct("toolbox")}>
               <h3>toolbox</h3>
             </div>
-            <Search handleChangeProduct={handleChangeProduct} handleGetInput={handleGetInput} test={test}/>
+            <Search handleChangeProduct={handleChangeProduct}/>
           </div>
 
           <div className="cards-container">
