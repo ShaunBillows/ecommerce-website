@@ -1,11 +1,33 @@
+import "./basket-item.css";
 
-const BasketItem = ({ item, handleRemoveItem }) => {
-    return (
-        <>
-            <h6>{item.image.slice(30,40)} {item.quantity}</h6>
-            <button type="button" onClick={ () => handleRemoveItem(item) }>Click Me!</button>
-        </>
-    )
-}
+const BasketItem = ({ item, handleRemoveItem, handleAddItem }) => {
+  return (
+    <div className="basket-item">
+      <div
+        className="image-container"
+        style={{
+          backgroundImage: `url(${item.image}
+          )`,
+        }}
+      ></div>
 
-export default BasketItem
+      <div className="discription">{item.name}</div>
+
+      <div className="cart-functions-container">
+        <div className="remove-btn">
+          <button type="button" onClick={() => handleRemoveItem(item)}>
+            -
+          </button>
+        </div>
+        <div className="quantity">{item.quantity}</div>
+        <div className="add-btn">
+          <button type="button" onClick={() => handleAddItem(item)}>
+            +
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default BasketItem;

@@ -1,0 +1,29 @@
+.basket-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  padding: 10px 10px;
+  margin: 5px;
+}
+
+.image-container {
+  outline: 2px solid black;
+  height: 30px;
+  width: 30px;
+
+  background-size: cover;
+}
+
+.cart-functions-container {
+  display: flex;
+  align-items: center;
+}
+
+.cart-functions-container > div {
+  padding: 0 2px;
+}
+
+.cart-functions-container > div > button {
+  width: 15px;
+}

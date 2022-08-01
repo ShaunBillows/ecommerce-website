@@ -11,8 +11,8 @@ const Card = ( {item, handleAddBasket} ) => {
                 <CardContent> 
                     <CardTitle className='card-item card-title' ></CardTitle>
                     <p>{item.price}</p>
-                    {/* <p>{props.status}</p>
-                    <p>{props.camera}</p>
+                    <p>{item.name}</p>
+                    {/* <p>{props.camera}</p>
                     <p>{props.sol}</p>
                     <p>{props.earthDate}</p>
                     <p>{props.landingDate}</p>
