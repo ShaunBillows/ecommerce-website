@@ -1,0 +1,9 @@
+.products-container {
+    display: flex;
+  }
+  
+  .product-item {
+    padding: 5px;
+    margin: 15px;
+    cursor: pointer;
+  }

@@ -7,10 +7,11 @@ const SidebarContent = ({
   basket,
   handleAddItem,
   handleShowSidebar,
-  getTotal
+  getTotal,
+  sidebarIsOpen
 }) => {
   return (
-    <>
+    <div className={sidebarIsOpen ? "sidebar open" : "sidebar"}>
       <div className="sidebar-icon-container">
         <SidebarIcon handleShowSidebar={handleShowSidebar} />
       </div>
@@ -23,7 +24,7 @@ const SidebarContent = ({
         />
       ))}
       {basket ? <h2>total: {getTotal()}</h2> : <h2></h2>}
-    </>
+    </div>
 
   );
 };

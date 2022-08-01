@@ -1,36 +1,36 @@
 import { useState, useEffect } from "react";
+import "./App.css";
 import Card from "./components/card/Card";
 import SidebarContent from "./components/sidebar/Sidebar";
-import "./App.css";
-import SidebarIcon from "./components/sidebar-icon/SidebarIcon";
 import CheckoutModal from "./components/modal/CheckoutModal"
-import Search from "./components/Search"
-
-const faker = require("faker");
+import Header from "./components/Header"
+import Products from "./components/Products"
 
 const App = () => {
 
+  const faker = require("faker");
+
   const [shopItems, setShopItems] = useState([]);
   const [basket, setBasket] = useState([]);
-  const [sidebar, setSidebar] = useState(false);
-  const [modalIsOpen, setIsOpen] = useState(false);
+  const [sidebarIsOpen, setSidebar] = useState(false);
+  const [modalIsOpen, setModal] = useState(false);
   const [modalContent, setModalContent] = useState('review')
 
   // checkout modal functions
 
   function openModal() {
     setModalContent('review')
-    setIsOpen(true);
+    setModal(true);
   }
 
   function closeModal() {
-    setIsOpen(false);
+    setModal(false);
   }
 
   // header functions
 
   const getBasketItemNumber = () => {
-    return basket.reduce((previousValue, currentValue) =>  previousValue + currentValue.quantity,0)
+    return basket.reduce((previousValue, currentValue) =>  previousValue + currentValue.quantity, 0)
   }
 
   const handleChangeProduct = async (newProduct) => {
@@ -67,9 +67,8 @@ const App = () => {
   // sidebar functions
 
   const handleShowSidebar = () => {
-    setSidebar(!sidebar);
+    setSidebar(!sidebarIsOpen);
   };
-
 
   const handleAddBasket = (item) => {
     const find = basket.find((el) => el.image === item.image);
@@ -111,84 +110,40 @@ const App = () => {
     getShopItems("hammer");
   }, []);
 
-  // useEffect(() => {
-  //   getTotal();
-  // }, [basket]);
-
   return (
     <>
-      <div className={sidebar ? "sidebar open" : "sidebar"}>
         <SidebarContent
+          sidebarIsOpen={sidebarIsOpen}
           basket={basket}
           handleRemoveItem={handleRemoveItem}
           handleAddItem={handleAddItem}
           handleShowSidebar={handleShowSidebar}
           getTotal={getTotal}
         />
-      </div>
-
-      <div className="body">
         <div className="content">
-          <div className="header">
-            <div className="heading-container">
-              <h1>Hardware Store</h1>
-            </div>
-            <div className="cheackout-container">
-              <div className="checkout-item checkout-icon" onClick={() =>{ openModal(); setSidebar(false);} }></div>
-              <div className="checkout-item checkout-quantity">
-                {getBasketItemNumber()}
-              </div>
-            </div>
-            <div className="sidebar-toggle">
-              <SidebarIcon handleShowSidebar={handleShowSidebar}/>
-            </div>
-          </div>
-
-          <div className="products-container">
-            <div
-              className="product-item"
-              onClick={() => handleChangeProduct("hammer")}
-            >
-              <h3>hammers</h3>
-            </div>
-            <br></br>
-            <div
-              className="product-item"
-              onClick={() => handleChangeProduct("saw")}
-            >
-              <h3>saws</h3>
-            </div>
-            <br></br>
-            <div
-              className="product-item"
-              onClick={() => handleChangeProduct("drill")}
-            >
-              <h3>drills</h3>
-            </div>
-            <div
-              className="product-item"
-              onClick={() => handleChangeProduct("chainsaw")}
-            >
-              <h3>chainsaw</h3>
-            </div>
-            <div
-              className="product-item"
-              onClick={() => handleChangeProduct("toolbox")}>
-              <h3>toolbox</h3>
-            </div>
-            <Search handleChangeProduct={handleChangeProduct}/>
-          </div>
-
+          <Header 
+            openModal={openModal} 
+            setSidebar={setSidebar} 
+            getBasketItemNumber={getBasketItemNumber} 
+            handleShowSidebar={handleShowSidebar}
+          />
+          <Products handleChangeProduct={handleChangeProduct}/>
           <div className="cards-container">
             {shopItems.map((item, i) => (
               <Card item={item} handleAddBasket={handleAddBasket} key={i} />
             ))}
           </div>
         </div>
-
-        <CheckoutModal modalIsOpen={modalIsOpen} closeModal={closeModal} basket={basket} modalContent={modalContent} getTotal={getTotal} setModalContent={setModalContent} setBasket={setBasket} handleAddItem={handleAddItem} handleRemoveItem={handleRemoveItem}/>
-
-      </div>
+        <CheckoutModal 
+          modalIsOpen={modalIsOpen} 
+          closeModal={closeModal} 
+          basket={basket} 
+          modalContent={modalContent} 
+          getTotal={getTotal} 
+          setModalContent={setModalContent} 
+          setBasket={setBasket} 
+          handleAddItem={handleAddItem} 
+          handleRemoveItem={handleRemoveItem}/>
     </>
   );
 };
