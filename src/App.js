@@ -15,9 +15,10 @@ const App = () => {
   const [sidebar, setSidebar] = useState(false);
   const [modalIsOpen, setIsOpen] = useState(false);
   const [modalContent, setModalContent] = useState('review')
+  const [test, setTest] = useState(0)
 
-  const handleGetInput = () => {
-    return
+  const handleGetInput = (event) => {
+    return setTest(String.toString(event))
   }
 
   // checkout modal functions
@@ -180,7 +181,7 @@ const App = () => {
               onClick={() => handleChangeProduct("toolbox")}>
               <h3>toolbox</h3>
             </div>
-            <Search handleChangeProduct={handleChangeProduct} handleGetInput={handleGetInput}/>
+            <Search handleChangeProduct={handleChangeProduct} handleGetInput={handleGetInput} test={test}/>
           </div>
 
           <div className="cards-container">
