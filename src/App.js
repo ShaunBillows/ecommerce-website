@@ -15,11 +15,6 @@ const App = () => {
   const [sidebar, setSidebar] = useState(false);
   const [modalIsOpen, setIsOpen] = useState(false);
   const [modalContent, setModalContent] = useState('review')
-  const [test, setTest] = useState(0)
-
-  const handleGetInput = (event) => {
-    return setTest(String.toString(event))
-  }
 
   // checkout modal functions
 
