@@ -1,43 +1,31 @@
 import Search from "./Search"
 import "./Products.css"
+import Product from "./Product"
 
-const Products = ({ handleChangeProduct }) => {
+const Products = ({ handleChangeProduct, searchItem }) => {
+ 
+    const products = [ "hammer", "saws", "drills", "chainsaws" ]
 
     return (
+
+      <div className="product-and-search-container">
+
         <div className="products-container">
-        <div
-          className="product-item"
-          onClick={() => handleChangeProduct("hammer")}
-        >
-          <h3>hammers</h3>
-        </div>
-        <br></br>
-        <div
-          className="product-item"
-          onClick={() => handleChangeProduct("saw")}
-        >
-          <h3>saws</h3>
-        </div>
-        <br></br>
-        <div
-          className="product-item"
-          onClick={() => handleChangeProduct("drill")}
-        >
-          <h3>drills</h3>
-        </div>
-        <div
-          className="product-item"
-          onClick={() => handleChangeProduct("chainsaw")}
-        >
-          <h3>chainsaw</h3>
-        </div>
-        <div
-          className="product-item"
-          onClick={() => handleChangeProduct("toolbox")}>
-          <h3>toolbox</h3>
-        </div>
+
+          { products.map( (item, index) => (
+            <Product handleChangeProduct={handleChangeProduct} item={item} key={index}
+          />
+          )) }
+
         <Search handleChangeProduct={handleChangeProduct}/>
       </div>
+      
+      <div className="search-display">
+          <h4>Showing results for {searchItem}...</h4>
+        </div>
+
+        </div>
+
     )
 }
 

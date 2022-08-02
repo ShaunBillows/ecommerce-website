@@ -2,14 +2,8 @@ import BasketItem from "../basket-item/basket-item";
 import "./Sidebar.css";
 import SidebarIcon from "../sidebar-icon/SidebarIcon";
 
-const SidebarContent = ({
-  handleRemoveItem,
-  basket,
-  handleAddItem,
-  handleShowSidebar,
-  getTotal,
-  sidebarIsOpen
-}) => {
+const SidebarContent = ({ handleRemoveItem, basket, handleAddItem, handleShowSidebar, getTotal, sidebarIsOpen }) => {
+  
   return (
     <div className={sidebarIsOpen ? "sidebar open" : "sidebar"}>
       <div className="sidebar-icon-container">

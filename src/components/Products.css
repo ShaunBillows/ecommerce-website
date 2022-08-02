@@ -2,8 +2,20 @@
     display: flex;
   }
   
-  .product-item {
-    padding: 5px;
-    margin: 15px;
-    cursor: pointer;
-  }
+.product-item {
+  padding: 5px;
+  margin: 15px;
+  cursor: pointer;
+}
+
+
+
+.product-and-search-container {
+  display: flex;
+  flex-direction: column;
+  text-align: end;
+}
+
+.search-display {
+  padding: 0 0;
+}

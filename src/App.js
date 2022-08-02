@@ -5,16 +5,35 @@ import SidebarContent from "./components/sidebar/Sidebar";
 import CheckoutModal from "./components/modal/CheckoutModal"
 import Header from "./components/Header"
 import Products from "./components/Products"
+import ShopItems from "./components/ShopItems"
 
 const App = () => {
 
   const faker = require("faker");
 
-  const [shopItems, setShopItems] = useState([]);
-  const [basket, setBasket] = useState([]);
-  const [sidebarIsOpen, setSidebar] = useState(false);
-  const [modalIsOpen, setModal] = useState(false);
-  const [modalContent, setModalContent] = useState('review')
+  const [ shopItems, setShopItems ] = useState([]);
+  const [ basket, setBasket ] = useState([]);
+  const [ sidebarIsOpen, setSidebar ] = useState(false);
+  const [ modalIsOpen, setModal ] = useState(false);
+  const [ modalContent, setModalContent ] = useState("review")
+  const [ currPage, setPage ] = useState(1)
+  const [ searchItem, setSearchItem ] = useState("hammer")
+
+  useEffect(() => {
+    getShopItems(searchItem);
+  }, []);
+
+  // next page functions
+
+  const handleIncrementPage = async () => {
+    await setPage( () => currPage + 1 ) 
+    await getShopItems(searchItem, currPage)
+  }
+
+  const handleDecrementPage = async () => {
+    await setPage( () => currPage - 1 ) 
+    await getShopItems(searchItem, currPage)
+  }
 
   // checkout modal functions
 
@@ -34,13 +53,15 @@ const App = () => {
   }
 
   const handleChangeProduct = async (newProduct) => {
+    setSearchItem(newProduct)
+    setPage(1)
     await getShopItems(newProduct);
   };
 
-  const getShopItems = async (item) => {
+  const getShopItems = async (item, page=1) => {
     try {
       const response = await fetch(
-        `https://api.unsplash.com/search/photos?query=${item}&client_id=a_QuiCYdhJR3n-SB10HVqHIsqTmiiCUjFX0cmzbvMXk`
+        `https://api.unsplash.com/search/photos?client_id=a_QuiCYdhJR3n-SB10HVqHIsqTmiiCUjFX0cmzbvMXk&query=${item}&per_page=20&page=${page}`
       );
       const data = await response.json();
       setShopItems(
@@ -106,20 +127,16 @@ const App = () => {
     );
   };
 
-  useEffect(() => {
-    getShopItems("hammer");
-  }, []);
-
   return (
     <>
-        <SidebarContent
-          sidebarIsOpen={sidebarIsOpen}
-          basket={basket}
-          handleRemoveItem={handleRemoveItem}
-          handleAddItem={handleAddItem}
-          handleShowSidebar={handleShowSidebar}
-          getTotal={getTotal}
-        />
+          <SidebarContent
+            sidebarIsOpen={sidebarIsOpen}
+            basket={basket}
+            handleRemoveItem={handleRemoveItem}
+            handleAddItem={handleAddItem}
+            handleShowSidebar={handleShowSidebar}
+            getTotal={getTotal}
+          />
         <div className="content">
           <Header 
             openModal={openModal} 
@@ -127,12 +144,11 @@ const App = () => {
             getBasketItemNumber={getBasketItemNumber} 
             handleShowSidebar={handleShowSidebar}
           />
-          <Products handleChangeProduct={handleChangeProduct}/>
-          <div className="cards-container">
-            {shopItems.map((item, i) => (
-              <Card item={item} handleAddBasket={handleAddBasket} key={i} />
-            ))}
-          </div>
+
+          <Products handleChangeProduct={handleChangeProduct} searchItem={searchItem}/>
+
+
+          <ShopItems handleAddBasket={handleAddBasket} handleDecrementPage={handleDecrementPage} handleIncrementPage={handleIncrementPage} basket={basket} currPage={currPage} shopItems={shopItems}/>
         </div>
         <CheckoutModal 
           modalIsOpen={modalIsOpen} 
@@ -144,7 +160,7 @@ const App = () => {
           setBasket={setBasket} 
           handleAddItem={handleAddItem} 
           handleRemoveItem={handleRemoveItem}/>
-    </>
+    </> 
   );
 };
 
