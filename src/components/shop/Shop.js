@@ -1,6 +1,6 @@
-import Card from "./card/Card"
+import Card from "./Card"
 
-const ShopItems = ({handleAddBasket, handleDecrementPage, handleIncrementPage, basket, currPage, shopItems}) => {
+const Shop = ({handleAddBasket, handleDecrementPage, handleIncrementPage, basket, currPage, shopItems}) => {
     return (
         <div>
             
@@ -23,4 +23,4 @@ const ShopItems = ({handleAddBasket, handleDecrementPage, handleIncrementPage, b
     )
 }
 
-export default ShopItems
+export default Shop

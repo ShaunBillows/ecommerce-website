@@ -1,6 +1,6 @@
 import Search from "./Search"
 import "./Products.css"
-import Product from "./Product"
+import Product from "../header/Product"
 
 const Products = ({ handleChangeProduct, searchItem }) => {
  

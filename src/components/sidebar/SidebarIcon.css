@@ -1,7 +1,7 @@
 .sidebar-icon-container {
   height: 20px;
   width: 20px;
-  background-image: url("../../images/sidebar-icon-17.jpeg");
+  background-image: url("../images/sidebar-icon-17.jpeg");
   background-size: cover;
   cursor: pointer;
 }

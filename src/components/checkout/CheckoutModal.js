@@ -1,10 +1,8 @@
 import Modal from 'react-modal'
 // import { useState} from 'react'
 import "./CheckoutModal.css"
-import CheckoutItem from '../checkout-item/CheckoutItem';
-import ReviewOrder from '../review-order/ReviewOrder';
-import { toBeInTheDOM } from '@testing-library/jest-dom/dist/matchers';
-import Payment from "../payment/Payment"
+import ReviewOrder from '../checkout/ReviewOrder';
+import Payment from "../checkout/Payment"
 
 
 const customStyles = {

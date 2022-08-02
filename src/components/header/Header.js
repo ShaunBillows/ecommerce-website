@@ -1,5 +1,5 @@
 import "./Header.css"
-import SidebarIcon from "./sidebar-icon/SidebarIcon"
+import SidebarIcon from "../sidebar/SidebarIcon"
 
 
 const Header = ({ getBasketItemNumber, openModal, setSidebar, handleShowSidebar }) => {

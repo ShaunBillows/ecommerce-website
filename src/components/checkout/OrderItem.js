@@ -1,8 +1,4 @@
-
-
-
-
-const CheckoutItem = ({item, handleAddItem, handleRemoveItem}) => {
+const OrderItem = ({item, handleAddItem, handleRemoveItem}) => {
     return (
         <div>
             <span>{item.name}</span>
@@ -15,4 +11,4 @@ const CheckoutItem = ({item, handleAddItem, handleRemoveItem}) => {
     )
 }
 
-export default CheckoutItem
+export default OrderItem

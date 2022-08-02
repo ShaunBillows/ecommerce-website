@@ -40,11 +40,11 @@
 }
 
 .scroll-button-left {
-  background-image: url("./images/arrow-left.png");
+  background-image: url("./components/images/arrow-left.png");
   background-size: contain;
 }
 
 .scroll-button-right {
-  background-image: url("./images/arrow-right.png");
+  background-image: url("./components/images/arrow-right.png");
   background-size: contain;
 }

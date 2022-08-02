@@ -1,11 +1,10 @@
 import { useState, useEffect } from "react";
 import "./App.css";
-import Card from "./components/card/Card";
-import SidebarContent from "./components/sidebar/Sidebar";
-import CheckoutModal from "./components/modal/CheckoutModal"
-import Header from "./components/Header"
-import Products from "./components/Products"
-import ShopItems from "./components/ShopItems"
+import Sidebar from "./components/sidebar/Sidebar";
+import CheckoutModal from "./components/checkout/CheckoutModal"
+import Header from "./components/header/Header"
+import Products from "./components/header/Products"
+import Shop from "./components/shop/Shop"
 
 const App = () => {
 
@@ -61,7 +60,7 @@ const App = () => {
   const getShopItems = async (item, page=1) => {
     try {
       const response = await fetch(
-        `https://api.unsplash.com/search/photos?client_id=a_QuiCYdhJR3n-SB10HVqHIsqTmiiCUjFX0cmzbvMXk&query=${item}&per_page=20&page=${page}`
+        `https://api.unsplash.com/search/photos?client_id=a_QuiCYdhJR3n-SB10HVqHIsqTmiiCUjFX0cmzbvMXk&query=${item}&per_page=12&page=${page}`
       );
       const data = await response.json();
       setShopItems(
@@ -129,7 +128,7 @@ const App = () => {
 
   return (
     <>
-          <SidebarContent
+          <Sidebar
             sidebarIsOpen={sidebarIsOpen}
             basket={basket}
             handleRemoveItem={handleRemoveItem}
@@ -145,21 +144,30 @@ const App = () => {
             handleShowSidebar={handleShowSidebar}
           />
 
-          <Products handleChangeProduct={handleChangeProduct} searchItem={searchItem}/>
-
-
-          <ShopItems handleAddBasket={handleAddBasket} handleDecrementPage={handleDecrementPage} handleIncrementPage={handleIncrementPage} basket={basket} currPage={currPage} shopItems={shopItems}/>
+          <Products 
+          handleChangeProduct={handleChangeProduct} 
+          searchItem={searchItem}
+          />
+          <Shop 
+            handleAddBasket={handleAddBasket} 
+            handleDecrementPage={handleDecrementPage} 
+            handleIncrementPage={handleIncrementPage} 
+            basket={basket} 
+            currPage={currPage} 
+            shopItems={shopItems}
+          />
         </div>
         <CheckoutModal 
-          modalIsOpen={modalIsOpen} 
-          closeModal={closeModal} 
-          basket={basket} 
-          modalContent={modalContent} 
-          getTotal={getTotal} 
-          setModalContent={setModalContent} 
-          setBasket={setBasket} 
-          handleAddItem={handleAddItem} 
-          handleRemoveItem={handleRemoveItem}/>
+            modalIsOpen={modalIsOpen} 
+            closeModal={closeModal} 
+            basket={basket} 
+            modalContent={modalContent} 
+            getTotal={getTotal} 
+            setModalContent={setModalContent} 
+            setBasket={setBasket} 
+            handleAddItem={handleAddItem} 
+            handleRemoveItem={handleRemoveItem}
+          />
     </> 
   );
 };
