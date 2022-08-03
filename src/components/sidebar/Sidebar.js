@@ -19,7 +19,6 @@ const SidebarContent = ({ handleDecrementBasket, basket, handleIncrementBasket, 
       ))}
       {basket ? <h2>total: {getTotal()}</h2> : <h2></h2>}
     </div>
-
   );
 };
 

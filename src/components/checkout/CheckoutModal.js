@@ -1,11 +1,11 @@
-import Modal from 'react-modal'
-// import { useState} from 'react'
 import "./CheckoutModal.css"
+import Modal from 'react-modal'
 import ReviewOrder from '../checkout/ReviewOrder';
 import Payment from "../checkout/Payment"
 
+const CheckoutModal = ({modalIsOpen, afterOpenModal, closeModal, basket, modalContent, getTotal, setModalContent, setBasket, handleDecrementBasket, handleIncrementBasket}) => {
 
-const customStyles = {
+  const customStyles = {
     content: {
       top: '50%',
       left: '50%',
@@ -16,41 +16,41 @@ const customStyles = {
     },
   };
 
-Modal.setAppElement(document.getElementById('root'));
+  Modal.setAppElement(document.getElementById('root'));
 
-const CheckoutModal = ({modalIsOpen, afterOpenModal, closeModal, basket, modalContent, getTotal, setModalContent, setBasket, handleDecrementBasket, handleIncrementBasket}) => {
-
-    return (
-        <div>
-        <Modal
-          isOpen={modalIsOpen}
-          onAfterOpen={() => afterOpenModal()}
-          onRequestClose={() => closeModal()}
-          style={customStyles}
-          contentLabel="Checkout Modal"
-          className="Modal"
-          overlayClassName="Overlay"
-        >
-          <button onClick={() => closeModal()}>back to shop</button>
-     
-        {
-            modalContent === 'review' 
-            ?
-            <ReviewOrder basket={basket} getTotal={getTotal} setModalContent={setModalContent} handleDecrementBasket={handleDecrementBasket} handleIncrementBasket={handleIncrementBasket}/> 
-            :
-            <div></div>
-        }
-
-        {
-            modalContent === 'payment' 
-            ?
-            <Payment setModalContent={setModalContent} closeModal={closeModal} setBasket={setBasket}/> 
-            :
-            <div></div>
-        }
-        </Modal>
-      </div>
-    )
+  return (
+    <Modal
+      isOpen={modalIsOpen}
+      onAfterOpen={() => afterOpenModal()}
+      onRequestClose={() => closeModal()}
+      style={customStyles}
+      contentLabel="Checkout Modal"
+      className="Modal"
+      overlayClassName="Overlay"
+    >
+      <button onClick={() => closeModal()}>back to shop</button>
+      {
+          modalContent === 'review' 
+          ?
+          <ReviewOrder 
+            basket={basket} 
+            getTotal={getTotal} 
+            setModalContent={setModalContent} 
+            handleDecrementBasket={handleDecrementBasket} 
+            handleIncrementBasket={handleIncrementBasket}
+          /> 
+          :
+          <div></div>
+      }
+      {
+          modalContent === 'payment' 
+          ?
+          <Payment setModalContent={setModalContent} closeModal={closeModal} setBasket={setBasket}/> 
+          :
+          <div></div>
+      }
+    </Modal>
+  )
 }
 
 export default CheckoutModal

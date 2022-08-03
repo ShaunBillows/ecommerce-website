@@ -3,7 +3,6 @@ const Product = ({ item, handleChangeProduct }) => {
         <div className="product-item" onClick={() => handleChangeProduct(item)}>
             <h3>{item}</h3>
         </div>
-
     )
 }
 

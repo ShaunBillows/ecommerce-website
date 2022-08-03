@@ -25,7 +25,7 @@ const App = () => {
     getshop(searchItem);
   }, []);
 
-  // next page functions
+  // page scroll functions
 
   const handleIncrementPage = async () => {
     setPage( () => currPage + 1 ) 
@@ -145,11 +145,6 @@ const App = () => {
           setSidebar={setSidebar} 
           getBasketItemNumber={getBasketItemNumber} 
           handleShowSidebar={handleShowSidebar}
-        />
-
-        <Products 
-          handleChangeProduct={handleChangeProduct} 
-          searchItem={searchItem}
         />
         <Shop 
           handleAddBasket={handleAddBasket} 

@@ -1,4 +1,5 @@
 import Card from "./Card"
+import "./shop.css"
 
 const Shop = ({handleAddBasket, handleDecrementPage, handleIncrementPage, basket, currPage, shop}) => {
     return (

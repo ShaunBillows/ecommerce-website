@@ -1,0 +1,37 @@
+.cards-container {
+    display: grid;
+    grid-auto-flow: row;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+  
+    margin-top: 2rem;
+    padding: 2rem;
+    outline: 1px solid black;
+  }
+  
+  
+  .scroll-buttons-container {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+  }
+  
+  .scroll-buttons-container > div {
+    padding: 1rem;
+    cursor: pointer;
+    transition: 0.3s;
+  }
+  .scroll-buttons-container > div:hover{
+    transform: scale(1.2);
+  }
+  
+  .scroll-button-left {
+    background-image: url("../images/arrow-left.png");
+    background-size: contain;
+  } 
+  
+  .scroll-button-right {
+    background-image: url("../images/arrow-right.png");
+    background-size: contain;
+  }
+  
