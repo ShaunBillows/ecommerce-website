@@ -18,7 +18,7 @@ const customStyles = {
 
 Modal.setAppElement(document.getElementById('root'));
 
-const CheckoutModal = ({modalIsOpen, afterOpenModal, closeModal, basket, modalContent, getTotal, setModalContent, setBasket, handleRemoveItem, handleAddItem}) => {
+const CheckoutModal = ({modalIsOpen, afterOpenModal, closeModal, basket, modalContent, getTotal, setModalContent, setBasket, handleDecrementBasket, handleIncrementBasket}) => {
 
     return (
         <div>
@@ -36,7 +36,7 @@ const CheckoutModal = ({modalIsOpen, afterOpenModal, closeModal, basket, modalCo
         {
             modalContent === 'review' 
             ?
-            <ReviewOrder basket={basket} getTotal={getTotal} setModalContent={setModalContent} handleRemoveItem={handleRemoveItem} handleAddItem={handleAddItem}/> 
+            <ReviewOrder basket={basket} getTotal={getTotal} setModalContent={setModalContent} handleDecrementBasket={handleDecrementBasket} handleIncrementBasket={handleIncrementBasket}/> 
             :
             <div></div>
         }

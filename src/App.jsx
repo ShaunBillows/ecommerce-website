@@ -5,12 +5,13 @@ import CheckoutModal from "./components/checkout/CheckoutModal"
 import Header from "./components/header/Header"
 import Products from "./components/header/Products"
 import Shop from "./components/shop/Shop"
+const faker = require("faker");
 
 const App = () => {
 
-  const faker = require("faker");
+  // Hooks
 
-  const [ shopItems, setShopItems ] = useState([]);
+  const [ shop, setShop ] = useState([]);
   const [ basket, setBasket ] = useState([]);
   const [ sidebarIsOpen, setSidebar ] = useState(false);
   const [ modalIsOpen, setModal ] = useState(false);
@@ -18,20 +19,22 @@ const App = () => {
   const [ currPage, setPage ] = useState(1)
   const [ searchItem, setSearchItem ] = useState("hammer")
 
+  // initialise shop
+
   useEffect(() => {
-    getShopItems(searchItem);
+    getshop(searchItem);
   }, []);
 
   // next page functions
 
   const handleIncrementPage = async () => {
-    await setPage( () => currPage + 1 ) 
-    await getShopItems(searchItem, currPage)
+    setPage( () => currPage + 1 ) 
+    await getshop(searchItem, currPage)
   }
 
   const handleDecrementPage = async () => {
-    await setPage( () => currPage - 1 ) 
-    await getShopItems(searchItem, currPage)
+    setPage( () => currPage - 1 ) 
+    await getshop(searchItem, currPage)
   }
 
   // checkout modal functions
@@ -54,16 +57,16 @@ const App = () => {
   const handleChangeProduct = async (newProduct) => {
     setSearchItem(newProduct)
     setPage(1)
-    await getShopItems(newProduct);
+    await getshop(newProduct);
   };
 
-  const getShopItems = async (item, page=1) => {
+  const getshop = async (item, page=1) => {
     try {
       const response = await fetch(
-        `https://api.unsplash.com/search/photos?client_id=a_QuiCYdhJR3n-SB10HVqHIsqTmiiCUjFX0cmzbvMXk&query=${item}&per_page=12&page=${page}`
+        `${process.env.REACT_APP_UNSPLASH_URI}&query=${item}&per_page=12&page=${page}`
       );
       const data = await response.json();
-      setShopItems(
+      setShop(
         data.results.map((el) => {
           return {
             image: el.urls.thumb,
@@ -76,12 +79,6 @@ const App = () => {
     } catch (err) {
       console.log(err);
     }
-  };
-
-  // shared functions
-
-  const getTotal = () => {
-    return [...basket].reduce((prev, next) => prev + next.price * next.quantity, 0)
   };
 
   // sidebar functions
@@ -105,7 +102,7 @@ const App = () => {
 
   // basket functions 
 
-  const handleRemoveItem = (item) => {
+  const handleDecrementBasket = (item) => {
     const find = [...basket].find((el) => el.image === item.image);
     if (find.quantity !== 1) {
       setBasket(
@@ -118,7 +115,7 @@ const App = () => {
     }
   };
 
-  const handleAddItem = (item) => {
+  const handleIncrementBasket = (item) => {
     setBasket(
       [...basket].map((el) =>
         el.image === item.image ? { ...el, quantity: el.quantity + 1 } : el
@@ -126,48 +123,54 @@ const App = () => {
     );
   };
 
+  // shared functions
+
+  const getTotal = () => {
+    return [...basket].reduce((prev, next) => prev + next.price * next.quantity, 0)
+  };
+
   return (
     <>
-          <Sidebar
-            sidebarIsOpen={sidebarIsOpen}
-            basket={basket}
-            handleRemoveItem={handleRemoveItem}
-            handleAddItem={handleAddItem}
-            handleShowSidebar={handleShowSidebar}
-            getTotal={getTotal}
-          />
-        <div className="content">
-          <Header 
-            openModal={openModal} 
-            setSidebar={setSidebar} 
-            getBasketItemNumber={getBasketItemNumber} 
-            handleShowSidebar={handleShowSidebar}
-          />
+      <Sidebar
+        sidebarIsOpen={sidebarIsOpen}
+        basket={basket}
+        handleDecrementBasket={handleDecrementBasket}
+        handleIncrementBasket={handleIncrementBasket}
+        handleShowSidebar={handleShowSidebar}
+        getTotal={getTotal}
+      />
+      <div className="content">
+        <Header 
+          openModal={openModal} 
+          setSidebar={setSidebar} 
+          getBasketItemNumber={getBasketItemNumber} 
+          handleShowSidebar={handleShowSidebar}
+        />
 
-          <Products 
+        <Products 
           handleChangeProduct={handleChangeProduct} 
           searchItem={searchItem}
-          />
-          <Shop 
-            handleAddBasket={handleAddBasket} 
-            handleDecrementPage={handleDecrementPage} 
-            handleIncrementPage={handleIncrementPage} 
-            basket={basket} 
-            currPage={currPage} 
-            shopItems={shopItems}
-          />
-        </div>
-        <CheckoutModal 
-            modalIsOpen={modalIsOpen} 
-            closeModal={closeModal} 
-            basket={basket} 
-            modalContent={modalContent} 
-            getTotal={getTotal} 
-            setModalContent={setModalContent} 
-            setBasket={setBasket} 
-            handleAddItem={handleAddItem} 
-            handleRemoveItem={handleRemoveItem}
-          />
+        />
+        <Shop 
+          handleAddBasket={handleAddBasket} 
+          handleDecrementPage={handleDecrementPage} 
+          handleIncrementPage={handleIncrementPage} 
+          basket={basket} 
+          currPage={currPage} 
+          shop={shop}
+        />
+      </div>
+    <CheckoutModal 
+        modalIsOpen={modalIsOpen} 
+        closeModal={closeModal} 
+        basket={basket} 
+        modalContent={modalContent} 
+        getTotal={getTotal} 
+        setModalContent={setModalContent} 
+        setBasket={setBasket} 
+        handleIncrementBasket={handleIncrementBasket} 
+        handleDecrementBasket={handleDecrementBasket}
+      />
     </> 
   );
 };

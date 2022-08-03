@@ -2,7 +2,7 @@ import BasketItem from "./basket-item";
 import "./Sidebar.css";
 import SidebarIcon from "./SidebarIcon";
 
-const SidebarContent = ({ handleRemoveItem, basket, handleAddItem, handleShowSidebar, getTotal, sidebarIsOpen }) => {
+const SidebarContent = ({ handleDecrementBasket, basket, handleIncrementBasket, handleShowSidebar, getTotal, sidebarIsOpen }) => {
   
   return (
     <div className={sidebarIsOpen ? "sidebar open" : "sidebar"}>
@@ -12,8 +12,8 @@ const SidebarContent = ({ handleRemoveItem, basket, handleAddItem, handleShowSid
       {basket.map((item, i) => (
         <BasketItem
           item={item}
-          handleRemoveItem={handleRemoveItem}
-          handleAddItem={handleAddItem}
+          handleDecrementBasket={handleDecrementBasket}
+          handleIncrementBasket={handleIncrementBasket}
           key={i}
         />
       ))}

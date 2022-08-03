@@ -33,10 +33,10 @@
 .scroll-buttons-container > div {
   padding: 1rem;
   cursor: pointer;
-  transition: 0.5s;
+  transition: 0.3s;
 }
 .scroll-buttons-container > div:hover{
-  transform: scale(1.05);
+  transform: scale(1.2);
 }
 
 .scroll-button-left {

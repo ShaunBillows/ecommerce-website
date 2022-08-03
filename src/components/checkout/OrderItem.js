@@ -1,10 +1,10 @@
-const OrderItem = ({item, handleAddItem, handleRemoveItem}) => {
+const OrderItem = ({item, handleIncrementBasket, handleDecrementBasket}) => {
     return (
         <div>
             <span>{item.name}</span>
-            <span onClick={() => handleRemoveItem(item)}>-</span>
+            <span onClick={() => handleDecrementBasket(item)}>-</span>
             {item.quantity}
-            <div onClick={() => handleAddItem(item)}>+</div>
+            <div onClick={() => handleIncrementBasket(item)}>+</div>
             <span>{item.price * item.quantity}</span>
 
         </div>

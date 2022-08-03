@@ -1,6 +1,6 @@
 import "./basket-item.css";
 
-const BasketItem = ({ item, handleRemoveItem, handleAddItem }) => {
+const BasketItem = ({ item, handleDecrementBasket, handleIncrementBasket }) => {
   return (
     <div className="basket-item">
       <div
@@ -15,13 +15,13 @@ const BasketItem = ({ item, handleRemoveItem, handleAddItem }) => {
 
       <div className="cart-functions-container">
         <div className="remove-btn">
-          <button type="button" onClick={() => handleRemoveItem(item)}>
+          <button type="button" onClick={() => handleDecrementBasket(item)}>
             -
           </button>
         </div>
         <div className="quantity">{item.quantity}</div>
         <div className="add-btn">
-          <button type="button" onClick={() => handleAddItem(item)}>
+          <button type="button" onClick={() => handleIncrementBasket(item)}>
             +
           </button>
         </div>

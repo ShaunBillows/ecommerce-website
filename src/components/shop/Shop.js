@@ -1,12 +1,12 @@
 import Card from "./Card"
 
-const Shop = ({handleAddBasket, handleDecrementPage, handleIncrementPage, basket, currPage, shopItems}) => {
+const Shop = ({handleAddBasket, handleDecrementPage, handleIncrementPage, basket, currPage, shop}) => {
     return (
         <div>
             
             { basket ? <div></div>: <h3>Oops, no items found...</h3>}
           <div className="cards-container">
-            {shopItems.map((item, i) => (
+            {shop.map((item, i) => (
               <Card item={item} handleAddBasket={handleAddBasket} key={i} />
             ))}
             <div></div>
