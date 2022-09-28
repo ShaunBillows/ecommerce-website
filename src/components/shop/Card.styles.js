@@ -1,10 +1,10 @@
 import styled from "styled-components";
 
 const width = 200;
-const imageHeight = 120;
+const imageHeight = 150;
 
 export const CardItem = styled.div`
-  width: ${width}px;
+  min-width: ${width}px;
   overflow: hidden;
   box-shadow: 0px 0px 15px -5px;
   transition: 0.5s;
@@ -19,7 +19,7 @@ export const CardItem = styled.div`
 
 export const ImageContainer = styled.div`
   overflow: hidden;
-  height: ${imageHeight}px;
+  max-height: ${imageHeight}px;
 
   display: flex;
   justify-content: center;
@@ -30,7 +30,7 @@ export const ImageContainer = styled.div`
 export const Img = styled.img`
   overflow: hidden;
   // height: 200px;
-  width: ${width}px;
+  width: 100%;
 `;
 
 export const CardContent = styled.div`

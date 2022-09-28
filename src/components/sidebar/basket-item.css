@@ -5,6 +5,11 @@
 
   padding: 10px 10px;
   margin: 5px;
+  border: 1px solid black;
+}
+
+.basket-item-border {
+  border-bottom: 1px solid black;
 }
 
 .image-container {
@@ -26,4 +31,7 @@
 
 .cart-functions-container > div > button {
   width: 15px;
+}
+.discription {
+  padding: 0 1rem;
 }

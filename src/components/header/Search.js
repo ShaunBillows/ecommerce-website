@@ -15,7 +15,7 @@ const Search = ({handleChangeProduct}) => {
     const handleClickSearch = () => {
         handleChangeProduct(input);
         setInput("");
-    }
+    };
 
     return (
         <span className="search-container">

@@ -1,37 +1,55 @@
 .cards-container {
-    display: grid;
-    grid-auto-flow: row;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 10px;
-  
-    margin-top: 2rem;
-    padding: 2rem;
-    outline: 1px solid black;
+  margin-top: 10rem;
+  max-width: 1000px;
+  margin: 0 auto;
+  display: grid;
+  grid-gap: 1rem;
+  /* outline: 1px solid black; */
+}
+
+/* Screen larger than 600px? 2 column */
+@media (min-width: 600px) {
+  .cards-container {
+    grid-template-columns: repeat(2, 1fr);
   }
-  
-  
-  .scroll-buttons-container {
-    display: flex;
-    justify-content: center;
-    gap: 1rem;
+}
+
+/* Screen larger than 900px? 3 columns */
+@media (min-width: 900px) {
+  .cards-container {
+    grid-template-columns: repeat(3, 1fr);
   }
-  
-  .scroll-buttons-container > div {
-    padding: 1rem;
-    cursor: pointer;
-    transition: 0.3s;
-  }
-  .scroll-buttons-container > div:hover{
-    transform: scale(1.2);
-  }
-  
-  .scroll-button-left {
-    background-image: url("../images/arrow-left.png");
-    background-size: contain;
-  } 
-  
-  .scroll-button-right {
-    background-image: url("../images/arrow-right.png");
-    background-size: contain;
-  }
-  
+}
+
+/* @media (min-width: 1200px) {
+  .cards-container { grid-template-columns: repeat(4, 1fr); }
+} */
+
+.scroll-buttons-container {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-bottom: 2rem;
+  border-top: 1px solid black;
+  margin-top: 0.5rem;
+  padding-top: 1.5rem;
+}
+
+.scroll-buttons-container > div {
+  padding: 1rem;
+  cursor: pointer;
+  transition: 0.3s;
+}
+.scroll-buttons-container > div:hover {
+  transform: scale(1.2);
+}
+
+.scroll-button-left {
+  background-image: url("../images/arrow-left.png");
+  background-size: contain;
+}
+
+.scroll-button-right {
+  background-image: url("../images/arrow-right.png");
+  background-size: contain;
+}

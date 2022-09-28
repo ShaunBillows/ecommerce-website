@@ -1,46 +1,45 @@
 import { useState, useEffect } from "react";
 import "./App.css";
 import Sidebar from "./components/sidebar/Sidebar";
-import CheckoutModal from "./components/checkout/CheckoutModal"
-import Header from "./components/header/Header"
-import Products from "./components/header/Products"
-import Shop from "./components/shop/Shop"
+import CheckoutModal from "./components/checkout/CheckoutModal";
+import Header from "./components/header/Header";
+import Shop from "./components/shop/Shop";
 const faker = require("faker");
 
 const App = () => {
-
   // Hooks
 
-  const [ shop, setShop ] = useState([]);
-  const [ basket, setBasket ] = useState([]);
-  const [ sidebarIsOpen, setSidebar ] = useState(false);
-  const [ modalIsOpen, setModal ] = useState(false);
-  const [ modalContent, setModalContent ] = useState("review")
-  const [ currPage, setPage ] = useState(1)
-  const [ searchItem, setSearchItem ] = useState("hammer")
+  const [shop, setShop] = useState([]);
+  const [basket, setBasket] = useState([]);
+  const [sidebarIsOpen, setSidebar] = useState(false);
+  const [modalIsOpen, setModal] = useState(false);
+  const [modalContent, setModalContent] = useState("review");
+  const [currPage, setPage] = useState(1);
+  const [searchItem, setSearchItem] = useState("hammer");
 
   // initialise shop
 
   useEffect(() => {
-    getshop(searchItem);
+    getshop(searchItem, currPage);
+    // eslint-disable-next-line
   }, []);
 
   // page scroll functions
 
   const handleIncrementPage = async () => {
-    setPage( () => currPage + 1 ) 
-    await getshop(searchItem, currPage)
-  }
+    setPage(() => currPage + 1);
+    await getshop(searchItem, currPage);
+  };
 
   const handleDecrementPage = async () => {
-    setPage( () => currPage - 1 ) 
-    await getshop(searchItem, currPage)
-  }
+    setPage(() => currPage - 1);
+    await getshop(searchItem, currPage);
+  };
 
   // checkout modal functions
 
   function openModal() {
-    setModalContent('review')
+    setModalContent("review");
     setModal(true);
   }
 
@@ -51,16 +50,19 @@ const App = () => {
   // header functions
 
   const getBasketItemNumber = () => {
-    return basket.reduce((previousValue, currentValue) =>  previousValue + currentValue.quantity, 0)
-  }
+    return basket.reduce(
+      (previousValue, currentValue) => previousValue + currentValue.quantity,
+      0
+    );
+  };
 
   const handleChangeProduct = async (newProduct) => {
-    setSearchItem(newProduct)
-    setPage(1)
+    setSearchItem(newProduct);
+    setPage(1);
     await getshop(newProduct);
   };
 
-  const getshop = async (item, page=1) => {
+  const getshop = async (item, page = 1) => {
     try {
       const response = await fetch(
         `${process.env.REACT_APP_UNSPLASH_URI}&query=${item}&per_page=12&page=${page}`
@@ -100,7 +102,7 @@ const App = () => {
     }
   };
 
-  // basket functions 
+  // basket functions
 
   const handleDecrementBasket = (item) => {
     const find = [...basket].find((el) => el.image === item.image);
@@ -126,47 +128,54 @@ const App = () => {
   // shared functions
 
   const getTotal = () => {
-    return [...basket].reduce((prev, next) => prev + next.price * next.quantity, 0)
+    return [...basket].reduce(
+      (prev, next) => prev + next.price * next.quantity,
+      0
+    );
   };
 
   return (
     <>
-      <Sidebar
-        sidebarIsOpen={sidebarIsOpen}
-        basket={basket}
-        handleDecrementBasket={handleDecrementBasket}
-        handleIncrementBasket={handleIncrementBasket}
-        handleShowSidebar={handleShowSidebar}
-        getTotal={getTotal}
-      />
-      <div className="content">
-        <Header 
-          openModal={openModal} 
-          setSidebar={setSidebar} 
-          getBasketItemNumber={getBasketItemNumber} 
+      <div className="body">
+        <Sidebar
+          sidebarIsOpen={sidebarIsOpen}
+          basket={basket}
+          handleDecrementBasket={handleDecrementBasket}
+          handleIncrementBasket={handleIncrementBasket}
           handleShowSidebar={handleShowSidebar}
+          getTotal={getTotal}
         />
-        <Shop 
-          handleAddBasket={handleAddBasket} 
-          handleDecrementPage={handleDecrementPage} 
-          handleIncrementPage={handleIncrementPage} 
-          basket={basket} 
-          currPage={currPage} 
-          shop={shop}
-        />
+        <div className="content">
+          <Header
+            openModal={openModal}
+            setSidebar={setSidebar}
+            getBasketItemNumber={getBasketItemNumber}
+            handleShowSidebar={handleShowSidebar}
+            searchItem={searchItem}
+            handleChangeProduct={handleChangeProduct}
+          />
+          <Shop
+            handleAddBasket={handleAddBasket}
+            handleDecrementPage={handleDecrementPage}
+            handleIncrementPage={handleIncrementPage}
+            basket={basket}
+            currPage={currPage}
+            shop={shop}
+          />
+        </div>
       </div>
-    <CheckoutModal 
-        modalIsOpen={modalIsOpen} 
-        closeModal={closeModal} 
-        basket={basket} 
-        modalContent={modalContent} 
-        getTotal={getTotal} 
-        setModalContent={setModalContent} 
-        setBasket={setBasket} 
-        handleIncrementBasket={handleIncrementBasket} 
+      <CheckoutModal
+        modalIsOpen={modalIsOpen}
+        closeModal={closeModal}
+        basket={basket}
+        modalContent={modalContent}
+        getTotal={getTotal}
+        setModalContent={setModalContent}
+        setBasket={setBasket}
+        handleIncrementBasket={handleIncrementBasket}
         handleDecrementBasket={handleDecrementBasket}
       />
-    </> 
+    </>
   );
 };
 

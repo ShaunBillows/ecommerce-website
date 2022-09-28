@@ -1,7 +1,8 @@
 .sidebar {
   width: 0;
   height: 100%;
-  position: fixed;
+  position: absolute;
+  left: 0;
   z-index: 1;
 
   background: lightblue;
@@ -12,13 +13,26 @@
 }
 
 .sidebar-icon-container {
+  float: right;
+  position: relative;
 }
 
 .open {
   width: 400px;
-  /* background: black; */
+  padding: 1rem;
+}
+
+@media (max-width: 400px) {
+  .open {
+    width: 100%;
+  }
 }
 
 button {
   /* position: absolute; */
+}
+
+.total-border {
+  margin-top: 1rem;
+  border-top: 2px solid black;
 }

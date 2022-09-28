@@ -1,6 +1,33 @@
+.header {
+  width: 100%;
+  margin-bottom: 1rem;
+  border-bottom: solid 1px black;
+}
+
 .heading-container {
-    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    padding-top: 1rem;
+    align-items: center;
+    width: 100%;
+}
+
+.heading-container > div {
+  font-weight: bold;
+  font-size: xx-large;
+}
+.heading-container > h1 {
+ margin-bottom: -0.6rem;
+ padding: 0.5rem;
+ padding-left: 0.4em;
+}
+
+  .logo {
+    height: 1.5rem;
+    width: 1.5rem;
+    background-color: blue;
   }
+
   .sidebar-toggle {
     position: absolute;
     top: 0;
@@ -9,24 +36,24 @@
     margin: 20px;
   
     margin-left: 300px;
-  }
+}
   .cheackout-container {
-    position: absolute;
-    right: 0;
-    top: 0;
-    margin: 20px;
-    margin-right: 300px;
-    display: flex;
-    flex-direction: column;
+    align-self: flex-end;
+    margin-left: auto;
+    
   }
   .checkout-icon {
     height: 30px;
     width: 30px;
-    padding: 5px;
+    /* padding: 5px; */
     background-image: url("../images/checkout-icon-14.jpeg");
     background-size: cover;
     cursor: pointer;
   }
   .checkout-quantity {
     text-align: center;
+    /* position: relative;
+    margin-left: 1.7rem;
+    margin-top: -0.6rem; */
+    font-size: large;
   }

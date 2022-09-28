@@ -1,0 +1,13 @@
+.review-order-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  gap: 1rem;
+}
+.checkout-button {
+  width: 100px;
+  align-self: flex-end;
+}
+.total {
+  margin-left: auto;
+}

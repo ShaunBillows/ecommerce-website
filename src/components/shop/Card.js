@@ -3,7 +3,7 @@ import { CardItem, ImageContainer, CardContent, Img, ButtonContainer, CardTitle,
 const Card = ( {item, handleAddBasket} ) => {
 
     return (
-            <CardItem onClick={() => handleAddBasket(item)}>
+            <CardItem>
                 <ImageContainer>
                     <Img src={item.image}/> 
                 </ImageContainer>
@@ -14,7 +14,7 @@ const Card = ( {item, handleAddBasket} ) => {
                 </CardContent>
                 <ButtonContainer>
                     <Button >
-                        <Anchor target="_blank"></Anchor>
+                        <Anchor target="_blank" onClick={() => handleAddBasket(item)}>Add to Basket</Anchor>
                     </Button>
                 </ButtonContainer>
             </CardItem>

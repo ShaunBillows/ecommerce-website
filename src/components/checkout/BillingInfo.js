@@ -1,10 +1,12 @@
-const BillingInfo = ({ item }) => {
-    return (
-        <div>
-            <input></input>
-            <span>{item}</span>
-        </div>
-    )
-}
+import "./BillingInfo.css";
 
-export default BillingInfo
+const BillingInfo = ({ item }) => {
+  return (
+    <div className="payment-container">
+      <input className="billing-input"></input>
+      <span className="billing-text">{item}</span>
+    </div>
+  );
+};
+
+export default BillingInfo;

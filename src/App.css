@@ -2,7 +2,13 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  outline: 2px limegreen solid;
+  /* outline: 2px limegreen solid; */
+}
+body {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 1rem;
 }
 
 .content {
@@ -10,4 +16,6 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  /* border: solid red 20px; */
+  width: 100%;
 }
